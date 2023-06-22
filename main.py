@@ -11,8 +11,10 @@ from emonkey   import MailGwApi
 from terminut  import printf as print
 from threading import Thread
 
-with open("./proxies.txt", "r+") as f:
-    proxies = [i.strip() for i in f.readlines()]
+try:
+    with open("./proxies.txt", "r+") as f:
+        proxies = [i.strip() for i in f.readlines()]
+except: proxies = None
 
 class Monkey:
     def __init__(self) -> None:
