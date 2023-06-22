@@ -11,11 +11,19 @@ from emonkey   import MailGwApi
 from terminut  import printf as print
 from threading import Thread
 
+with open("./proxies.txt", "r+") as f:
+    proxies = [i.strip() for i in f.readlines()]
 
 class Monkey:
     def __init__(self) -> None:
         self.mailapi = MailGwApi()
         self.session = Session()
+        if proxies:
+            proxy = random.choice(proxies)
+            self.session.proxies = {
+                "http": f"http://{proxy}",
+                "https": f"http://{proxy"
+            }
         self.session.headers = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/114.0',
             'Accept': 'application/json, text/plain, */*',
